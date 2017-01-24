@@ -1,10 +1,7 @@
 from flask import Flask, request
 import json
 import requests
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-from chatterbot.trainers import ListTrainer
-from bot_trainer import BotTrainer
+
 
 app = Flask(__name__)
 
