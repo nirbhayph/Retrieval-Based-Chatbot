@@ -1,5 +1,4 @@
 from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
 
 
@@ -31,7 +30,7 @@ class BotTrainer(object):
    	chatbot = ChatBot("Ron Obvious")
 	def __init__(self):
 		chatbot = self.chatbot
-  		chatbot.set_trainer(ChatterBotCorpusTrainer)
+  		
   		chatbot.train("chatterbot.corpus.english")  		
 		chatbot.set_trainer(ListTrainer)
 		chatbot.train(self.conver)
