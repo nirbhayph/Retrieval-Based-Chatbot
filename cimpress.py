@@ -52,8 +52,7 @@ def handle_messages():
     print "Incoming from %s: %s" % (sender, message)
     if message=="hi":
       send_message_new(PAT, sender)
-    else:  
-      send_message(PAT, sender, message)
+    
   return "ok"
 
 def messaging_events(payload):
@@ -97,11 +96,11 @@ def send_message_new(token, recipient,image_url):
           "buttons":[
             {
               "type": "web_url",
-        "url": "https://theblendsalon.com/cimpress/index.php?url="+image_url,
+        "url": "https://theblendsalon.com/cimpress/index-1.php?url="+image_url,
         "title": "Edit",
         "webview_height_ratio": "compact",
                 "messenger_extensions": True,  
-                "fallback_url": "https://theblendsalon.com/cimpress"
+                "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?url="+image_url"
             }
           ]
         }
