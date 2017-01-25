@@ -72,7 +72,7 @@ def send_message_new(token, recipient):
           "buttons":[
             {
               "type": "web_url",
-        "url": "http://keybots.in",
+        "url": "http://109.73.164.163/cimpress",
         "title": "Visit Us"
             }
           ]
