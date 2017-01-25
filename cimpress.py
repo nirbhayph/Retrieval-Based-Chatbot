@@ -64,18 +64,15 @@ def send_message(token, recipient, text):
 def send_message_new(token, recipient):
  
   message={
-  "setting_type" : "call_to_actions",
-  "thread_state" : "existing_thread",
-  "call_to_actions":[
-    
-    {
-      "type":"web_url",
-      "title":"Checkout",
-      "url":"http://109.73.164.163/cimpress",
-      "webview_height_ratio": "full",
-      "messenger_extensions": True
-    }
-  ]
+  
+  "buttons":[
+              {
+                "type":"web_url",
+                "url":"http://109.73.164.163/cimpress",
+                "title":"Select Criteria",
+                "webview_height_ratio": "compact"
+              }
+        ]
 
   }
 
