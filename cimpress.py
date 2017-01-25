@@ -71,7 +71,7 @@ def send_message_new(token, recipient):
     {
       "type":"web_url",
       "title":"Checkout",
-      "url":"http://petersapparel.parseapp.com/checkout",
+      "url":"http://google.com",
       "webview_height_ratio": "full",
       "messenger_extensions": True
     }
