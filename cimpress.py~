@@ -72,7 +72,7 @@ def send_message_new(token, recipient):
           "buttons":[
             {
               "type": "web_url",
-        "url": "http://theblendsalon.com/cimpress",
+        "url": "https://theblendsalon.com/cimpress",
         "title": "Edit",
         "webview_height_ratio": "full",
                 "messenger_extensions": True,  

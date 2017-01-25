@@ -86,7 +86,10 @@ def send_message_new(token, recipient):
     params={"access_token": token},
     data=json.dumps({
       "recipient": {"id": recipient},
-      "message": message
+      "message": message,
+      "setting_type" : "domain_whitelisting",
+  "whitelisted_domains" : ["https://theblendsalon.com"],
+  "domain_action_type": "add"
     }),
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
