@@ -88,7 +88,7 @@ def send_message_new(token, recipient):
       "recipient": {"id": recipient},
       "message": message,
       "setting_type" : "domain_whitelisting",
-  "whitelisted_domains" : ["https://theblendsalon.com"],
+  "whitelisted_domains" : ["https://theblendsalon.com/cimpress"],
   "domain_action_type": "add"
     }),
     headers={'Content-type': 'application/json'})
