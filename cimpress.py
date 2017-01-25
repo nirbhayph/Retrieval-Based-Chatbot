@@ -82,7 +82,7 @@ def send_message_new(token, recipient):
       "title":"Checkout",
       "url":"http://petersapparel.parseapp.com/checkout",
       "webview_height_ratio": "full",
-      "messenger_extensions": true
+      "messenger_extensions": True
     },
     {
       "type":"web_url",
