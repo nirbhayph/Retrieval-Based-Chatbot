@@ -74,9 +74,7 @@ def send_message_new(token, recipient):
               "type": "web_url",
         "url": "https://theblendsalon.com/cimpress",
         "title": "Edit",
-        "webview_height_ratio": "full",
-                "messenger_extensions": True,  
-                "fallback_url": "https://google.com"
+        "webview_height_ratio": "half"
             }
           ]
         }
@@ -86,10 +84,7 @@ def send_message_new(token, recipient):
     params={"access_token": token},
     data=json.dumps({
       "recipient": {"id": recipient},
-      "message": message,
-      "setting_type" : "domain_whitelisting",
-  "whitelisted_domains" : ["https://theblendsalon.com/cimpress"],
-  "domain_action_type": "add"
+      "message": message
     }),
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
