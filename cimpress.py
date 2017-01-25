@@ -64,19 +64,22 @@ def send_message(token, recipient, text):
 def send_message_new(token, recipient):
  
   message={
-  
-  "buttons":[
-              {
-                "type":"web_url",
-                "url":"http://109.73.164.163/cimpress",
-                "title":"Select Criteria",
-                "webview_height_ratio": "compact"
-              }
-        ]
-
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"To have a conversational chat assistant made for your business, send an email to aditya@keyqual.com",
+          "buttons":[
+            {
+              "type": "web_url",
+        "url": "http://keybots.in",
+        "title": "Visit Us"
+            }
+          ]
+        }
+      }
   }
-
-  r = requests.post("https://graph.facebook.com/v2.6/me/thread_settings",
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
     params={"access_token": token},
     data=json.dumps({
       "recipient": {"id": recipient},
