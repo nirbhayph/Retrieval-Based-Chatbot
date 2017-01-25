@@ -100,7 +100,7 @@ def send_message_new(token, recipient,image_url):
         "title": "Edit",
         "webview_height_ratio": "compact",
                 "messenger_extensions": True,  
-                "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?url="+image_url"
+                "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?url="+image_url
             }
           ]
         }
