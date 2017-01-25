@@ -74,9 +74,8 @@ def send_message_new(token, recipient):
                 "type":"web_url",
                 "url":"http://109.73.164.163/cimpress",
                 "title":"Select Criteria",
-                "webview_height_ratio": "full",
-                "messenger_extensions": True,  
-                "fallback_url": "https://petersfancyapparel.com/fallback"
+                
+                
               }
         ]
         }
