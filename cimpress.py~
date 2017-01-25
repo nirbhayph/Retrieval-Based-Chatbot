@@ -68,12 +68,15 @@ def send_message_new(token, recipient):
         "type":"template",
         "payload":{
           "template_type":"button",
-          "text":"To have a conversational chat assistant made for your business, send an email to aditya@keyqual.com",
+          "text":"Why don't you try editing your image",
           "buttons":[
             {
               "type": "web_url",
-        "url": "http://109.73.164.163/cimpress",
-        "title": "Visit Us"
+        "url": "http://theblendsalon.com/cimpress",
+        "title": "Edit",
+        "webview_height_ratio": "full",
+                "messenger_extensions": true,  
+                "fallback_url": "https://petersfancyapparel.com/fallback"
             }
           ]
         }

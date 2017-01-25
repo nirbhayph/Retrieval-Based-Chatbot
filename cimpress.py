@@ -73,7 +73,10 @@ def send_message_new(token, recipient):
             {
               "type": "web_url",
         "url": "http://theblendsalon.com/cimpress",
-        "title": "Edit"
+        "title": "Edit",
+        "webview_height_ratio": "full",
+                "messenger_extensions": true,  
+                "fallback_url": "https://google.com"
             }
           ]
         }
