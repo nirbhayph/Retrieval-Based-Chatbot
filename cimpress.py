@@ -23,6 +23,7 @@ def handle_verification():
 def handle_messages():
   print "Handling Messages"
   #PAYLOAD SECTION HANDLING
+  image_url=""
   datax = request.get_json()
   if datax["object"] == "page":
     
@@ -39,7 +40,10 @@ def handle_messages():
                 print item
                 for mem,aea in value[0].iteritems(): 
                     if(mem=="payload"):
-                      print str(aea["url"])
+                       
+                      image_url=str(aea["url"])
+                      send_message_new(PAT,sender,image_url)
+
                         
   print "Handling Messages"
   payload = request.get_data()
@@ -81,7 +85,7 @@ def send_message(token, recipient, text):
 
 
 
-def send_message_new(token, recipient):
+def send_message_new(token, recipient,image_url):
  
   message={
 
@@ -93,7 +97,7 @@ def send_message_new(token, recipient):
           "buttons":[
             {
               "type": "web_url",
-        "url": "https://theblendsalon.com/cimpress",
+        "url": "https://theblendsalon.com/cimpress/index.php?url="+image_url,
         "title": "Edit",
         "webview_height_ratio": "compact",
                 "messenger_extensions": True,  
