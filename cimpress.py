@@ -42,6 +42,7 @@ def handle_messages():
                     if(mem=="payload"):
                        
                       image_url=str(aea["url"])
+                      print image_url
                       send_message_new(PAT,sender,image_url)
 
                         
