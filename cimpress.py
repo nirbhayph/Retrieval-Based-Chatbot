@@ -26,7 +26,10 @@ def handle_messages():
   print payload
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
-    send_message(PAT, sender, message)
+    if message=="hi":
+      send_message_new(PAT, sender)
+    else:  
+      send_message(PAT, sender, message)
   return "ok"
 
 def messaging_events(payload):
@@ -56,23 +59,48 @@ def send_message(token, recipient, text):
   if r.status_code != requests.codes.ok:
     print r.text
 
- # def send_message_new(token, recipient, text):
- #  """Send the message text to recipient with id recipient.
- #  """
- #
- #  t = BotTrainer()
- #  ans = t.respond(text)
- #  print ans
- #
- #  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
- #    params={"access_token": token},
- #    data=json.dumps({
- #      "recipient": {"id": recipient},
- #      "message": {"text": ans}
- #    }),
- #    headers={'Content-type': 'application/json'})
- #  if r.status_code != requests.codes.ok:
- #    print r.text
+
+
+def send_message_new(token, recipient):
+ 
+  message={
+  "setting_type" : "call_to_actions",
+  "thread_state" : "existing_thread",
+  "call_to_actions":[
+    {
+      "type":"postback",
+      "title":"Help",
+      "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
+    },
+    {
+      "type":"postback",
+      "title":"Start a New Order",
+      "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+    },
+    {
+      "type":"web_url",
+      "title":"Checkout",
+      "url":"http://petersapparel.parseapp.com/checkout",
+      "webview_height_ratio": "full",
+      "messenger_extensions": true
+    },
+    {
+      "type":"web_url",
+      "title":"View Website",
+      "url":"http://petersapparel.parseapp.com/"
+    }
+  ]
+  }
+
+  r = requests.post("https://graph.facebook.com/v2.6/me/thread_settings",
+    params={"access_token": token},
+    data=json.dumps({
+      "recipient": {"id": recipient},
+      "message": message
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text
 
 
 if __name__ == '__main__':
