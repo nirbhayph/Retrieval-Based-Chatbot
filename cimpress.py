@@ -70,14 +70,12 @@ def send_message_new(token, recipient):
           "template_type":"button",
           "text":"To have a conversational chat assistant made for your business, send an email to aditya@keyqual.com",
           "buttons":[
-              {
-                "type":"web_url",
-                "url":"http://109.73.164.163/cimpress",
-                "title":"Select Criteria",
-                
-                
-              }
-        ]
+            {
+              "type": "web_url",
+        "url": "http://109.73.164.163/cimpress",
+        "title": "Visit Us"
+            }
+          ]
         }
       }
   }
