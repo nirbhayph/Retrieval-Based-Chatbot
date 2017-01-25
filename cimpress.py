@@ -71,11 +71,12 @@ def send_message_new(token, recipient):
     {
       "type":"web_url",
       "title":"Checkout",
-      "url":"http://google.com",
+      "url":"http://109.73.164.163/cimpress",
       "webview_height_ratio": "full",
       "messenger_extensions": True
     }
   ]
+
   }
 
   r = requests.post("https://graph.facebook.com/v2.6/me/thread_settings",
