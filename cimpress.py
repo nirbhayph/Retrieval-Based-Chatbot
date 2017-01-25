@@ -86,9 +86,7 @@ def send_message_new(token, recipient):
   r = requests.post("https://graph.facebook.com/v2.6/me/messages",
     params={"access_token": token},
     data=json.dumps({
-      "setting_type" : "domain_whitelisting",
-    "whitelisted_domains" : ["https://theblendsalon.com/cimpress"],
-    "domain_action_type": "add",
+
       "recipient": {"id": recipient},
       "message": message
       
