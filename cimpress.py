@@ -22,6 +22,26 @@ def handle_verification():
 @app.route('/', methods=['POST'])
 def handle_messages():
   print "Handling Messages"
+  #PAYLOAD SECTION HANDLING
+  datax = request.get_json()
+  if datax["object"] == "page":
+    
+    for entry in datax["entry"]:
+      for messaging_event in entry["messaging"]:
+        sender = str(messaging_event["sender"]["id"].encode('unicode_escape'))   
+           
+        if messaging_event.get("message"):
+          
+          for item,value in messaging_event["message"].iteritems():
+              
+                    
+            if(str(item)=="attachments"):
+                print item
+                for mem,aea in value[0].iteritems(): 
+                    if(mem=="payload"):
+                      print str(aea["url"])
+                        
+  print "Handling Messages"
   payload = request.get_data()
   print payload
   for sender, message in messaging_events(payload):
