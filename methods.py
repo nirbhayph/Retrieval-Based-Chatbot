@@ -2,7 +2,7 @@ import MySQLdb as db
 from random import randint
 import time
 def connect():
-	connection = db.Connection(host="104.238.101.137", port=3306, user="theblend_root", passwd="google@12", db="theblend_cimpress")
+	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
 	return connection.cursor()
 #we get the row variable which contains the data of all rows and the n variable which contains the number of rows
 def get_RESULT_slider(row, n, MYSQL_COL_NUM_1, MYSQL_COL_NUM_2):
