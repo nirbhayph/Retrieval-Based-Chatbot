@@ -43,6 +43,10 @@ def handle_messages():
                        
                       image_url=str(aea["url"])
                       print image_url
+<<<<<<< HEAD
+                      store_image_link(sender,image_url)
+=======
+>>>>>>> d5955e414b20555e5757702022247d7483c85d4c
                       send_message_new(PAT,sender,image_url)
 
                         
@@ -52,7 +56,11 @@ def handle_messages():
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
     if message=="hi":
+<<<<<<< HEAD
       send_message_new(PAT, sender)
+=======
+      send_message_new(PAT, sender,image_url)
+>>>>>>> d5955e414b20555e5757702022247d7483c85d4c
     
   return "ok"
 
@@ -86,7 +94,24 @@ def send_message(token, recipient, text):
 
 
 def send_message_new(token, recipient,image_url):
+<<<<<<< HEAD
  
+=======
+
+  HOST = "109.73.164.163"
+  PORT = 3306
+  USER = "root"
+  PASSWORD = "root"
+  DB = "cimpress"
+
+  connection = db.Connection(host=HOST, port=PORT, user=USER, passwd=PASSWORD, db=DB)
+  c = connection.cursor()
+  c.execute("SELECT * FROM links")
+  row=c.fetchall()
+  for r in row:
+    print r
+  
+>>>>>>> d5955e414b20555e5757702022247d7483c85d4c
   message={
 
       "attachment":{
@@ -97,11 +122,19 @@ def send_message_new(token, recipient,image_url):
           "buttons":[
             {
               "type": "web_url",
+<<<<<<< HEAD
         "url": "https://theblendsalon.com/cimpress/index-1.php?userid="+recipient,
         "title": "Edit",
         "webview_height_ratio": "compact",
                 "messenger_extensions": True,  
                 "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?userid="+recipient
+=======
+        "url": "https://theblendsalon.com/cimpress/index-1.php?url="+image_url,
+        "title": "Edit",
+        "webview_height_ratio": "compact",
+                "messenger_extensions": True,  
+                "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?url="+image_url
+>>>>>>> d5955e414b20555e5757702022247d7483c85d4c
             }
           ]
         }
