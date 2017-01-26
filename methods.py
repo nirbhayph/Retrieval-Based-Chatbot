@@ -74,7 +74,7 @@ def store_image_link(recipient,link):
 	row=c.fetchall()
         print row
         print "Insert Into `links` (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')"
-        c.execute("Insert Into `links` (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')")
+        c.execute("Insert Into `links` (`userid`, `link_to_image`) VALUES ('recipient', 'link')")
 
 def get_last_filter(recipient):
         c = connect()
