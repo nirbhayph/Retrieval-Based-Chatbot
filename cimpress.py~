@@ -22,14 +22,38 @@ def handle_verification():
 @app.route('/', methods=['POST'])
 def handle_messages():
   print "Handling Messages"
+  #PAYLOAD SECTION HANDLING
+  image_url=""
+  datax = request.get_json()
+  if datax["object"] == "page":
+    
+    for entry in datax["entry"]:
+      for messaging_event in entry["messaging"]:
+        sender = str(messaging_event["sender"]["id"].encode('unicode_escape'))   
+           
+        if messaging_event.get("message"):
+          
+          for item,value in messaging_event["message"].iteritems():
+              
+                    
+            if(str(item)=="attachments"):
+                print item
+                for mem,aea in value[0].iteritems(): 
+                    if(mem=="payload"):
+                       
+                      image_url=str(aea["url"])
+                      print image_url
+                      send_message_new(PAT,sender,image_url)
+
+                        
+  print "Handling Messages"
   payload = request.get_data()
   print payload
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
     if message=="hi":
       send_message_new(PAT, sender)
-    else:  
-      send_message(PAT, sender, message)
+    
   return "ok"
 
 def messaging_events(payload):
@@ -61,9 +85,10 @@ def send_message(token, recipient, text):
 
 
 
-def send_message_new(token, recipient):
+def send_message_new(token, recipient,image_url):
  
   message={
+
       "attachment":{
         "type":"template",
         "payload":{
@@ -72,11 +97,11 @@ def send_message_new(token, recipient):
           "buttons":[
             {
               "type": "web_url",
-        "url": "https://theblendsalon.com/cimpress",
+        "url": "https://theblendsalon.com/cimpress/index-1.php?userid="+recipient,
         "title": "Edit",
-        "webview_height_ratio": "half",
+        "webview_height_ratio": "compact",
                 "messenger_extensions": True,  
-                "fallback_url": "https://theblendsalon.com/cimpress"
+                "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?userid="+recipient
             }
           ]
         }
@@ -85,8 +110,10 @@ def send_message_new(token, recipient):
   r = requests.post("https://graph.facebook.com/v2.6/me/messages",
     params={"access_token": token},
     data=json.dumps({
+
       "recipient": {"id": recipient},
       "message": message
+      
     }),
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
