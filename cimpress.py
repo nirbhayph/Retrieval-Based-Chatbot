@@ -53,7 +53,7 @@ def handle_messages():
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
     if message=="hi":
-      send_message(PAT, sender)
+      send_message(PAT, sender, message)
     
   return "ok"
 
