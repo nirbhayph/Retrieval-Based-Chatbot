@@ -2,7 +2,7 @@ import MySQLdb as db
 from random import randint
 import time
 def connect():
-	connection = db.Connection(host="theblendsalon.com", port=3306, user="theblend_root", passwd="google@12", db="theblend_cimpress")
+	connection = db.Connection(host="104.238.101.137", port=3306, user="theblend_root", passwd="google@12", db="theblend_cimpress")
 	return connection.cursor()
 #we get the row variable which contains the data of all rows and the n variable which contains the number of rows
 def get_RESULT_slider(row, n, MYSQL_COL_NUM_1, MYSQL_COL_NUM_2):
@@ -68,14 +68,9 @@ def get_sub_cat(cat_id):
         print "Subcategory Count is "+str(len(row))
 	return row, len(row)
 
-def store_last_filter(recipient,FILTER):
+def store_image_link(recipient,link):
         c = connect()
-        c.execute("select * from zz_last_search_filter where recipient='"+str(recipient)+"'")
-	row=c.fetchall()
-        if(len(row)>0):
-	   c.execute("Update zz_last_search_filter set lastfilter ='"+FILTER+"' where recipient='"+recipient+"'")
-        else:
-           c.execute("Insert Into zz_last_search_filter (`recipient`, `lastfilter`) VALUES ('"+recipient+"', '"+FILTER+"')")
+        c.execute("Insert Into links (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')")
 
 def get_last_filter(recipient):
         c = connect()
