@@ -86,7 +86,20 @@ def send_message(token, recipient, text):
 
 
 def send_message_new(token, recipient,image_url):
- 
+
+  HOST = "109.73.164.163"
+  PORT = 3306
+  USER = "root"
+  PASSWORD = "root"
+  DB = "cimpress"
+
+  connection = db.Connection(host=HOST, port=PORT, user=USER, passwd=PASSWORD, db=DB)
+  c = connection.cursor()
+  c.execute("SELECT * FROM links")
+  row=c.fetchall()
+  for r in row:
+    print r
+  
   message={
 
       "attachment":{
