@@ -75,7 +75,7 @@ def store_image_link(recipient,link):
         print row
         print "Insert Into `links` (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')"
         c.execute("Insert Into `links` (`userid`, `link_to_image`) VALUES ('recipient', 'link')")
-        d.autocommit(True)
+        d.commit()
         
 
 def get_last_filter(recipient):
