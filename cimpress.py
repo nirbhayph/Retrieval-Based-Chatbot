@@ -35,8 +35,7 @@ def handle_messages():
         if messaging_event.get("message"):
           
           for item,value in messaging_event["message"].iteritems():
-              
-                    
+                      
             if(str(item)=="attachments"):
                 print item
                 for mem,aea in value[0].iteritems(): 
