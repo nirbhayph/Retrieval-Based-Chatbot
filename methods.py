@@ -69,6 +69,9 @@ def get_sub_cat(cat_id):
 	return row, len(row)
 
 def store_image_link(recipient,link):
+        c.execute("SELECT * FROM links")
+	row=c.fetchall()
+        print row
         c = connect()
         c.execute("Insert Into links (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')")
 
