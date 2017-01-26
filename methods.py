@@ -3,7 +3,7 @@ from random import randint
 import time
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
-	return connection.cursor()
+	return connection.cursor(),connection
 #we get the row variable which contains the data of all rows and the n variable which contains the number of rows
 def get_RESULT_slider(row, n, MYSQL_COL_NUM_1, MYSQL_COL_NUM_2):
 	outer_list = []
@@ -69,12 +69,14 @@ def get_sub_cat(cat_id):
 	return row, len(row)
 
 def store_image_link(recipient,link):
-        c = connect()
+        c,d = connect()
         c.execute("SELECT * FROM links")
 	row=c.fetchall()
         print row
         print "Insert Into `links` (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')"
         c.execute("Insert Into `links` (`userid`, `link_to_image`) VALUES ('recipient', 'link')")
+        d.commit()
+        
 
 def get_last_filter(recipient):
         c = connect()
