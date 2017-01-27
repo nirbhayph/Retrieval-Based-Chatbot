@@ -1,6 +1,11 @@
 import MySQLdb as db
 from random import randint
 import time
+from urllib.request import urlopen
+from wand.image import Image
+from wand.display import display
+import wand
+
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
 	return connection.cursor(),connection
@@ -79,7 +84,7 @@ def store_image_link(recipient,link):
         
 
 def get_image_link(recipient):
-        c = connect()
+        c,d = connect()
         c.execute("select * from links where userid='"+str(recipient)+"' ORDER BY timestamp_ DESC")
 	row=c.fetchall()
         return row[0][2]
@@ -95,6 +100,28 @@ def get_the_services(CAT):
         c.execute("select * from zz_services where category_id='"+str(CAT)+"' LIMIT 10")
 	row=c.fetchall()
         return row, len(row)
+
+def make_image(bg_link,fg_link):
+        
+
+
+fg_url = fg_link
+bg_url = bg_link
+
+bg = urlopen(bg_url)
+with Image(file=bg) as bg_img:
+    fg = urlopen(fg_url)
+    with Image(file=fg) as fg_img:
+        #fg_img.transparent_color(wand.color.Color('#FFF'))
+        fg_img.resize(200,200)
+
+        bg_img.composite(fg_img, left=390, top=300)
+    fg.close()
+    #display(bg_img)
+    bg_img.save(filename='pikachu.jpg')
+
+    #bg_img.save("new_image.jpg")
+bg.close()
         
 
 

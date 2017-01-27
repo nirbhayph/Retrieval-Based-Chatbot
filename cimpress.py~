@@ -36,7 +36,9 @@ def handle_messages():
           print "Postback"
           print str(messaging_event["postback"]["payload"].encode('unicode_escape'))
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
-            link = get_image_link(sender)
+            fg_link = get_image_link(sender)
+            bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
+            make_image(bg_link,link)
             send_message_image(PAT,sender,link)
  
         if messaging_event.get("message"):
@@ -141,7 +143,7 @@ def send_message_image(token, recipient,link):
     "attachment":{
       "type":"image",
       "payload":{
-        "url":"https://petersapparel.com/img/shirt.png"
+        "url":link
       }
     }
   }
