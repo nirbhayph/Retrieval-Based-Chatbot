@@ -119,7 +119,7 @@ def make_image(bg_link,fg_link):
         fg.close()
         #display(bg_img)
         bg_img.save(filename='pikachu.jpg')
-        return bg_img
+        return 'pickachu.jpg'
         #bg_img.save("new_image.jpg")
     bg.close()
         
