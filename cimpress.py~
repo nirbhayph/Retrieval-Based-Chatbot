@@ -53,7 +53,7 @@ def handle_messages():
                       image_url=str(aea["url"])
                       print image_url
                       store_image_link(sender,image_url)
-                      send_message_menu(PAT,sender)
+                      send_message_edit(PAT,sender)
 
                         
   print "Handling Messages"
