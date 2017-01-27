@@ -79,7 +79,7 @@ def store_image_link(recipient,link):
         
 
 def get_image_link(recipient):
-        c = connect()
+        c,d = connect()
         c.execute("select * from links where userid='"+str(recipient)+"' ORDER BY timestamp_ DESC")
 	row=c.fetchall()
         return row[0][2]
