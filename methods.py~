@@ -124,11 +124,11 @@ def make_image(bg_link,fg_link):
         cnopts = pysftp.CnOpts()
         cnopts.hostkeys = None  
         with pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts) as sftp:
-            sftp.put(local_path, remote_path)
+            sftp.put(bg_img, '/var/www/html/')
 
 # Closes the connection
         srv.close()
-        return "http://109.73.164.163/"+filex
+        return str("http://109.73.164.163/pikachu.jpg")
         #bg_img.save("new_image.jpg")
     bg.close()
         

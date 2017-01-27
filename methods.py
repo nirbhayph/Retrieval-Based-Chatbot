@@ -128,7 +128,7 @@ def make_image(bg_link,fg_link):
 
 # Closes the connection
         srv.close()
-        return "http://109.73.164.163/"+filex
+        return str("http://109.73.164.163/pikachu.jpg")
         #bg_img.save("new_image.jpg")
     bg.close()
         
