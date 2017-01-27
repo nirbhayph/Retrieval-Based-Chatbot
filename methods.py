@@ -5,6 +5,7 @@ from six.moves import urllib
 from wand.image import Image
 from wand.display import display
 import wand
+import pysftp
 
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
@@ -118,8 +119,15 @@ def make_image(bg_link,fg_link):
             bg_img.composite(fg_img, left=390, top=300)
         fg.close()
         #display(bg_img)
+        filex='pikachu.jpg'
         bg_img.save(filename='pikachu.jpg')
-        return 'pickachu.jpg'
+        srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe")
+        with srv.cd('/var/www/html'): 
+            srv.put('hello.txt') 
+
+# Closes the connection
+        srv.close()
+        return "http://109.73.164.163/"+filex
         #bg_img.save("new_image.jpg")
     bg.close()
         
