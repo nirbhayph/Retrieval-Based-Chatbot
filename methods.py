@@ -121,7 +121,9 @@ def make_image(bg_link,fg_link):
         #display(bg_img)
         filex='pikachu.jpg'
         bg_img.save(filename='pikachu.jpg')
-        srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe")
+        cnopts = pysftp.CnOpts()
+        cnopts.hostkeys = None
+        srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts)
         with srv.cd('/var/www/html'): 
             srv.put('pikachu.jpg') 
         return str("http://109.73.164.163/pikachu.jpg")
