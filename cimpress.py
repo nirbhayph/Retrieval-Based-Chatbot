@@ -42,12 +42,16 @@ def handle_messages():
             send_message_image(PAT,sender,final_link)
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
             send_message_VC(PAT, sender) 
+            change_product_type(sender,"VC")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="MG":
-            send_message(PAT, sender,"Please upload an image you wish to add on the Mug")    
+            send_message(PAT, sender,"Please upload an image you wish to add on the Mug") 
+            change_product_type(sender,"MG")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="CL":
-            send_message(PAT, sender,"Please upload an image you wish to use")   
+            send_message(PAT, sender,"Please upload an image you wish to use")
+            change_product_type(sender,"CL")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="YES_VC":
-            send_message(PAT, sender,"Please upload your logo image")  
+            send_message(PAT, sender,"Please upload your logo image")
+            change_product_type(sender,"VC")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_VC":
             send_message_redirect_cimpress(PAT, sender)    
  

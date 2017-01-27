@@ -130,7 +130,11 @@ def make_image(bg_link,fg_link,sender):
         #bg_img.save("new_image.jpg")
     bg.close()
         
-
+def change_product_type(recipient,type_):
+    c,d = connect()
+    #print "Insert Into `links` (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')"
+    c.execute("Insert Into `cimpress_prod_type` (`userid`, `type`) VALUES ('"+recipient+"', '"+type_+"')")
+    d.commit()
 
 
 
