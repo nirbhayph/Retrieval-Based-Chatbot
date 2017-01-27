@@ -62,7 +62,8 @@ def handle_messages():
   print payload
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
-    if message=="hi":
+    w=["hi","hello","hey"]
+    if message.lower() in w:
       send_message_welcome(PAT, sender)
 
     
@@ -148,7 +149,7 @@ def send_message_welcome(token, recipient):
         "type":"template",
         "payload":{
           "template_type":"button",
-          "text":", what are you looking for?",
+          "text":"Hi, what are you looking for?",
           "buttons":[
            
             
