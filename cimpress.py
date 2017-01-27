@@ -40,6 +40,16 @@ def handle_messages():
             bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
             final_link = make_image(bg_link,fg_link,sender)
             send_message_image(PAT,sender,final_link)
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
+            send_message_VC(PAT, sender) 
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="MG":
+            send_message(PAT, sender,"Please upload an image you wish to add on the Mug")    
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="CL":
+            send_message(PAT, sender,"Please upload an image you wish to use")   
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="YES_VC":
+            send_message(PAT, sender,"Please upload your logo image")  
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_VC":
+            send_message_redirect_cimpress(PAT, sender)    
  
         if messaging_event.get("message"):
           
@@ -150,9 +160,7 @@ def send_message_welcome(token, recipient):
         "payload":{
           "template_type":"button",
           "text":"Hi, what are you looking for?",
-          "buttons":[
-           
-            
+          "buttons":[   
               {
         "type":"postback",
         "title":"Visiting Card",
@@ -187,7 +195,78 @@ def send_message_welcome(token, recipient):
   if r.status_code != requests.codes.ok:
     print r.text    
 
+def send_message_VC(token, recipient):
+ 
+  message={
 
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"Do you have a logo?",
+          "buttons":[   
+              {
+        "type":"postback",
+        "title":"Yes",
+        "payload":"YES_VC"
+      },
+      {
+        "type":"postback",
+        "title":"No",
+        "payload":"NO_VC"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text    
+
+def send_message_redirect_cimpress(PAT, sender):
+ 
+  message={
+
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"Click here to make your customised visiting card",
+          "buttons":[   
+              {
+        "type":"web_url",
+        "url":"http://theblendsalon.com/cimpress/api.html",
+        "title":"Create Visiting Card"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text    
 
 def send_message_image(token, recipient,link):
   message = {
