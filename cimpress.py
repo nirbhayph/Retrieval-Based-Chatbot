@@ -44,6 +44,7 @@ def handle_messages():
         if messaging_event.get("message"):
           
           for item,value in messaging_event["message"].iteritems():
+
                       
             if(str(item)=="attachments"):
                 print item
@@ -62,7 +63,8 @@ def handle_messages():
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
     if message=="hi":
-      send_message(PAT, sender, message)
+      send_message_welcome(PAT, sender)
+
     
   return "ok"
 
@@ -137,6 +139,54 @@ def send_message_edit(token, recipient):
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
     print r.text
+
+def send_message_welcome(token, recipient):
+ 
+  message={
+
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":", what are you looking for?",
+          "buttons":[
+           
+            
+              {
+        "type":"postback",
+        "title":"Visiting Card",
+        "payload":"VC"
+      },
+      {
+        "type":"postback",
+        "title":"Mugs",
+        "payload":"MU"
+      },
+      {
+        "type":"postback",
+        "title":"Clothing",
+        "payload":"CL"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text    
+
+
 
 def send_message_image(token, recipient,link):
   message = {
