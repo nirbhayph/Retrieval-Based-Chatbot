@@ -103,6 +103,7 @@ def send_message_new(token, recipient,image_url):
         "webview_height_ratio": "full",
                 "messenger_extensions": True,  
                 "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?userid="+recipient
+                "payload":"OPENING EDIT"
             }
           ]
         }
