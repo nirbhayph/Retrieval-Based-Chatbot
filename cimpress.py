@@ -38,7 +38,7 @@ def handle_messages():
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
             fg_link = get_image_link(sender)
             bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
-            final_link = make_image(bg_link,fg_link)
+            final_link = make_image(bg_link,fg_link,sender)
             send_message_image(PAT,sender,final_link)
  
         if messaging_event.get("message"):
