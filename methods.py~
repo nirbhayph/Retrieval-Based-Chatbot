@@ -119,7 +119,7 @@ with Image(file=bg) as bg_img:
     fg.close()
     #display(bg_img)
     bg_img.save(filename='pikachu.jpg')
-
+    return bg_img
     #bg_img.save("new_image.jpg")
 bg.close()
         
