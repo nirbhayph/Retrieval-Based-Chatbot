@@ -91,26 +91,7 @@ def send_message(token, recipient, text):
   if r.status_code != requests.codes.ok:
     print r.text
 
-def send_message_image(token, recipient,link):
-  message = {
-    "attachment":{
-      "type":"image",
-      "payload":{
-        "url":"https://petersapparel.com/img/shirt.png"
-      }
-    }
-  }
-  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-    params={"access_token": token},
-    data=json.dumps({
 
-      "recipient": {"id": recipient},
-      "message": message
-      
-    }),
-    headers={'Content-type': 'application/json'})
-  if r.status_code != requests.codes.ok:
-    print r.text
 
 def send_message_edit(token, recipient):
  
@@ -155,6 +136,25 @@ def send_message_edit(token, recipient):
   if r.status_code != requests.codes.ok:
     print r.text
 
+def send_message_image(token, recipient,link):
+  message = {
+    "attachment":{
+      "type":"image",
+      "payload":{
+        "url":"https://petersapparel.com/img/shirt.png"
+      }
+    }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
 
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text
 if __name__ == '__main__':
   app.run()

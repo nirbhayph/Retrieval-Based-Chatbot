@@ -141,7 +141,7 @@ def send_message_image(token, recipient,link):
     "attachment":{
       "type":"image",
       "payload":{
-        "url":"https://petersapparel.com/img/shirt.png"
+        "url":link
       }
     }
   }
