@@ -74,13 +74,13 @@ def store_image_link(recipient,link):
 	row=c.fetchall()
         print row
         print "Insert Into `links` (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')"
-        c.execute("Insert Into `links` (`userid`, `link_to_image`) VALUES ('recipient', 'link')")
+        c.execute("Insert Into `links` (`userid`, `link_to_image`) VALUES ('"+recipient+"', '"+link+"')")
         d.commit()
         
 
-def get_last_filter(recipient):
+def get_image_link(recipient):
         c = connect()
-        c.execute("select * from zz_last_search_filter where recipient='"+str(recipient)+"'")
+        c.execute("select * from links where userid='"+str(recipient)+"' ORDER BY timestamp_ DESC")
 	row=c.fetchall()
         return row, len(row)
 

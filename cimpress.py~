@@ -30,8 +30,15 @@ def handle_messages():
     
     for entry in datax["entry"]:
       for messaging_event in entry["messaging"]:
-        sender = str(messaging_event["sender"]["id"].encode('unicode_escape'))   
-           
+        sender = str(messaging_event["sender"]["id"].encode('unicode_escape'))  
+ 
+        if messaging_event.get("postback"):
+          print "Postback Show_Options"
+          print str(messaging_event["postback"]["payload"].encode('unicode_escape'))
+          if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
+            link = get_image_link(sender)
+            send_message_new(PAT,sender,link)
+ 
         if messaging_event.get("message"):
           
           for item,value in messaging_event["message"].iteritems():
@@ -94,7 +101,7 @@ def send_message_new(token, recipient,image_url):
         "type":"template",
         "payload":{
           "template_type":"button",
-          "text":"Why don't you try editing your image",
+          "text":"Why don't you try editing your image, or if you are ready, select 'Show'",
           "buttons":[
             {
               "type": "web_url",
@@ -102,9 +109,17 @@ def send_message_new(token, recipient,image_url):
         "title": "Edit",
         "webview_height_ratio": "full",
                 "messenger_extensions": True,  
-                "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?userid="+recipient
-                "payload":"OPENING EDIT"
-            }
+                "fallback_url": "https://theblendsalon.com/cimpress/index-1.php?userid="+recipient,
+                
+            },
+            
+              {
+        "type":"postback",
+        "title":"Show",
+        "payload":"SHOW_OPTIONS"
+      }
+                
+            
           ]
         }
       }

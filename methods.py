@@ -78,11 +78,11 @@ def store_image_link(recipient,link):
         d.commit()
         
 
-def get_last_filter(recipient):
+def get_image_link(recipient):
         c = connect()
-        c.execute("select * from zz_last_search_filter where recipient='"+str(recipient)+"'")
+        c.execute("select * from links where userid='"+str(recipient)+"' ORDER BY timestamp_ DESC")
 	row=c.fetchall()
-        return row, len(row)
+        return row[0][2]
 
 def get_FINAL_result(CAT, SUB_CAT): 
         c = connect()
