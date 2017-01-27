@@ -1,7 +1,7 @@
 import MySQLdb as db
 from random import randint
 import time
-from urllib.request import urlopen
+from six.moves import urllib
 from wand.image import Image
 from wand.display import display
 import wand

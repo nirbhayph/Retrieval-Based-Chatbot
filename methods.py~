@@ -105,23 +105,23 @@ def make_image(bg_link,fg_link):
         
 
 
-fg_url = fg_link
-bg_url = bg_link
+    fg_url = fg_link
+    bg_url = bg_link
 
-bg = urlopen(bg_url)
-with Image(file=bg) as bg_img:
-    fg = urlopen(fg_url)
-    with Image(file=fg) as fg_img:
-        #fg_img.transparent_color(wand.color.Color('#FFF'))
-        fg_img.resize(200,200)
+    bg = urlopen(bg_url)
+    with Image(file=bg) as bg_img:
+        fg = urlopen(fg_url)
+        with Image(file=fg) as fg_img:
+            #fg_img.transparent_color(wand.color.Color('#FFF'))
+            fg_img.resize(200,200)
 
-        bg_img.composite(fg_img, left=390, top=300)
-    fg.close()
-    #display(bg_img)
-    bg_img.save(filename='pikachu.jpg')
-    return bg_img
-    #bg_img.save("new_image.jpg")
-bg.close()
+            bg_img.composite(fg_img, left=390, top=300)
+        fg.close()
+        #display(bg_img)
+        bg_img.save(filename='pikachu.jpg')
+        return bg_img
+        #bg_img.save("new_image.jpg")
+    bg.close()
         
 
 
