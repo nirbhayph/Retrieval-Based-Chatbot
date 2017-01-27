@@ -37,7 +37,7 @@ def handle_messages():
           print str(messaging_event["postback"]["payload"].encode('unicode_escape'))
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
             link = get_image_link(sender)
-            send_message_new(PAT,sender,link)
+            send_message_image(PAT,sender,link)
  
         if messaging_event.get("message"):
           
@@ -51,7 +51,7 @@ def handle_messages():
                       image_url=str(aea["url"])
                       print image_url
                       store_image_link(sender,image_url)
-                      send_message_new(PAT,sender,image_url)
+                      send_message_menu(PAT,sender)
 
                         
   print "Handling Messages"
@@ -93,7 +93,7 @@ def send_message(token, recipient, text):
 
 
 
-def send_message_new(token, recipient,image_url):
+def send_message_edit(token, recipient):
  
   message={
 
@@ -136,6 +136,25 @@ def send_message_new(token, recipient,image_url):
   if r.status_code != requests.codes.ok:
     print r.text
 
+def send_message_image(token, recipient,link):
+  message = {
+    "attachment":{
+      "type":"image",
+      "payload":{
+        "url":"https://petersapparel.com/img/shirt.png"
+      }
+    }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
 
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text
 if __name__ == '__main__':
   app.run()
