@@ -234,7 +234,7 @@ def send_message_VC(token, recipient):
   if r.status_code != requests.codes.ok:
     print r.text    
 
-def send_message_redirect_cimpress(PAT, sender):
+def send_message_redirect_cimpress(token,recipient):
  
   message={
 
