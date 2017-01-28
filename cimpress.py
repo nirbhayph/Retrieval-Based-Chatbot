@@ -191,7 +191,7 @@ def send_message_welcome(token, recipient):
       {
         "type":"postback",
         "title":"Mugs",
-        "payload":"MU"
+        "payload":"MG"
       },
       {
         "type":"postback",
