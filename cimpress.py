@@ -51,7 +51,7 @@ def handle_messages():
                 list_f.append(make_image(i,fg_link,sender,count))
                 count=count+1
             print list_f
-            #send_message_image(PAT,sender,final_link)
+            product_slider(PAT,sender,list_f)
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
             send_message_VC(PAT, sender) 
             change_product_type(sender,"VC")
@@ -322,5 +322,20 @@ def send_message_image(token, recipient,link):
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
     print r.text
+
+def product_slider(token,recipient, list_f):
+  message={
+          "attachment": {
+              "type": "template",
+              "payload": {
+                  "template_type": "generic",
+                  "elements": send_message_product_slider(list_f, len(list_f)):
+              }
+          }
+    }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params={"access_token": token}, data=json.dumps({"recipient": {"id": recipient},"message": message}),headers={'Content-type': 'application/json'})
+    send_conclusion(token,recipient)
+    if r.status_code != requests.codes.ok:
+      print r.text
 if __name__ == '__main__':
   app.run()

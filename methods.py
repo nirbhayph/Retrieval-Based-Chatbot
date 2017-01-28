@@ -21,22 +21,54 @@ from time import gmtime, strftime
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
 	return connection.cursor(),connection
-#we get the row variable which contains the data of all rows and the n variable which contains the number of rows
-def get_RESULT_slider(row, n, MYSQL_COL_NUM_1, MYSQL_COL_NUM_2):
+
+def send_message_product_slider(row, n):
 	outer_list = []
+        title=[]
+        price=[]
+        if n==2:
+           price=["Rs. 300","Rs. 400"]
+           title=["Mug White", "Mug White Large"]
+        elif n==4:
+           price=["Rs. 300","Rs. 400","Rs.600", "Rs. 500"]
+           title=["TShirt1", "TShirt2", "TShirt3", "TShirt4"]
 	for i in range(n):
 		inner_dict = {
-			"title": row[i][MYSQL_COL_NUM_1],
-                        "subtitle": row[i][MYSQL_COL_NUM_2],
-			"image_url": "http://109.73.164.163/FLEXI_PORT/flexi_port.png",
-			"buttons": [{
+			"title": title[i],
+                        "subtitle": price[i],
+			"image_url": row[i],
+			"buttons": [
+              {
+                "type":"payment",
+                "title":"buy",
+                "payload":"ORDER+"+row[i],
+                "payment_summary":{
+                  "currency":"Rupees",
+                  "payment_type":"FIXED_AMOUNT",
+                  "is_test_payment" : true, 
+                  "merchant_name":"Cimpress",
+                  "requested_user_info":[
+                    "shipping_address",
+                    "contact_name",
+                    "contact_phone",
+                    "contact_email"
+                  ],
+                  "price_list":[
+                    {
+                      "label":"Subtotal",
+                      "amount":price[i]
+                    },
+                    {
+                      "label":"Taxes",
+                      "amount":"12.11"
+                    }
+                  ]
+                }
+              }, 
+                   {
 				"type": "web_url",
-				"url": "https://www.theflexiport.com",
+				"url": row[i],
 				"title": "View"
-			}, {
-				"type": "web_url",
-				"url": "https://www.theflexiport.com",
-				"title": "Apply"
 			}, 
                                {
 				"type": "element_share"
