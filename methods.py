@@ -195,7 +195,7 @@ def clarifAI(urlX):
                 li.append(b)
     return li
 
-def set_box(sender,msg):
+def set_box(recipient,msg):
         c,d = connect()
         c.execute("Insert Into `lock_box` (`userid`, `loc`) VALUES ('"+recipient+"', '"+msg+"')")
         d.commit()
