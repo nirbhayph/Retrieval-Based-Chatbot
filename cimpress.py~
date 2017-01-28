@@ -81,8 +81,10 @@ def handle_messages():
                           PROD_TYPE = get_product_type(sender)
                           if PROD_TYPE=="MG" or PROD_TYPE=="CL":
                               m = clarifAI(image_url)
+                              if len(m)>0:
+                                  send_message(PAT,sender,"We have some taglines you can use based on your image ;)"
                               for i in range(0,len(m)):
-                                  send_message(PAT,sender,m[i].encode('unicode_escape'))
+                                  send_message(PAT,sender,str(m[i].encode('unicode_escape')))
                               send_message_edit(PAT,sender)
                           elif PROD_TYPE=="VC":
                               send_message_redirect_cimpress(PAT, sender)    

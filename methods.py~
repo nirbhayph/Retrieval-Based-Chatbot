@@ -167,8 +167,8 @@ def clarifAI(urlX):
     #print(ans)
     xx=list()
     for i in range(0,len(ans['outputs'][0]['data']['concepts']) ):
-    xx.append(ans['outputs'][0]['data']['concepts'][i]['name'])
-    #xx=ans['outputs'][0]['data']['concepts'][i]
+      xx.append(ans['outputs'][0]['data']['concepts'][i]['name'])
+      #xx=ans['outputs'][0]['data']['concepts'][i]
     li = []
     taglines='{"results":[{"man":"Suits, Harvey Specter"},{"army":"Indian"},{"wedding":"Marry"},{"success":"india"}]}'
     taglines=json.loads(taglines)
