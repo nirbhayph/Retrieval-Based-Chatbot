@@ -195,6 +195,20 @@ def clarifAI(urlX):
                 li.append(b)
     return li
 
+def set_box(sender):
+        c,d = connect()
+        c.execute("Insert Into `lock_box` (`userid`, `loc`) VALUES ('"+recipient+"', 'LOC')")
+        d.commit()
+       
+
+
+def check_box(recipient):
+        c,d = connect()
+        c.execute("select * from lock_box where userid='"+str(recipient)+"' ORDER BY timestamp_ DESC")
+	row=c.fetchall()
+        return row[0][2]
+   
+
 
     
 
