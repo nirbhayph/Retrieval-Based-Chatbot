@@ -2,6 +2,11 @@ from flask import Flask, request
 import json
 import requests
 from methods import *
+from six.moves import urllib
+from wand.image import Image as x2x
+from wand.display import display
+import wand
+import pysftp
 
 
 app = Flask(__name__)
@@ -82,6 +87,10 @@ def handle_messages():
                       #Check for image quality
                       IMAGE_QUALITY=get_image_quality(image_url)
                       if IMAGE_QUALITY=="yes":
+                          nnx = urllib.request.urlopen(image_url)
+                          with x2x(file=nnx) as IMAG:
+                              filex=str(sender)+'-IMAG.jpg'
+                              IMAG.save(filename=filex)
                           send_message(PAT, sender,"Congratualtions! Your image cleared the quality test")
                           store_image_link(sender,image_url)
                           #CALL Vision API
@@ -94,6 +103,14 @@ def handle_messages():
                                   send_message(PAT,sender,str(m[i].encode('unicode_escape')))
                               send_message_edit(PAT,sender)
                           elif PROD_TYPE=="VC":
+                              cnopts = pysftp.CnOpts()
+        		      cnopts.hostkeys = None
+                              srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts)
+                              with srv.cd('/var/www/html/cimpress/images'): 
+                                  srv.put(filex)
+                              r = requests.get("http://109.73.164.163/cimpress/images/g-cloud.php?filex="+filex+"&sender="+sender)
+                              if len(str(r.content))>0:
+                                  send_message(PAT,sender,"Seems like you work in"+str(r.content))
                               send_message_redirect_cimpress(PAT, sender)    
                       elif IMAGE_QUALITY=="no":
                           send_message(PAT, sender,"The quality of the image you uploaded doesn't look up to the mark, there will be a problem when it comes to printing")
