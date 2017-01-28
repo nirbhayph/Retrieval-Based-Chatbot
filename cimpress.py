@@ -82,10 +82,12 @@ def handle_messages():
             if(str(item)=="attachments"):
                 print item
                 for mem,aea in value[0].iteritems(): 
-                    if(mem=="type" and type(aea)==type('')):
-                          send_message(token,recipient,"Thank you for placing an order with Vista Print")
-                          send_contact_details(PAT,sender)
-                          break
+                    print "AEA"
+                    print aea
+                    #if(mem=="type" and type(aea)==type('')):
+                          #send_message(token,recipient,"Thank you for placing an order with Vista Print")
+                          #send_contact_details(PAT,sender)
+                          #break
                     if(mem=="payload"):
                       image_url=str(aea["url"])
                       print image_url
