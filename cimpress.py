@@ -332,10 +332,18 @@ def product_slider(token,recipient, list_f):
                   "elements": send_message_product_slider(list_f, len(list_f))
               }
           }
-    }
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params={"access_token": token}, data=json.dumps({"recipient": {"id": recipient},"message": message}),headers={'Content-type': 'application/json'})
-    send_conclusion(token,recipient)
-    if r.status_code != requests.codes.ok:
-      print r.text
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text
+    
 if __name__ == '__main__':
   app.run()

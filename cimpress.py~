@@ -329,7 +329,7 @@ def product_slider(token,recipient, list_f):
               "type": "template",
               "payload": {
                   "template_type": "generic",
-                  "elements": send_message_product_slider(list_f, len(list_f)):
+                  "elements": send_message_product_slider(list_f, len(list_f))
               }
           }
     }
