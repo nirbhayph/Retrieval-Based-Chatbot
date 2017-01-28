@@ -14,6 +14,9 @@ import json
 from clarifai.rest import ClarifaiApp
 app = ClarifaiApp("eSSlQCgzDDqshi0U2XRTg-6gYh0yTbCg1faYChPp", "1IbRENOi-ABMknyufNFjBIYu-KF43jSOQXX65r64")
 from clarifai.rest import Image as ClImage
+from time import gmtime, strftime
+
+
 
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
@@ -127,7 +130,7 @@ def make_image(bg_link,fg_link,sender,count):
             bg_img.composite(fg_img, left=390, top=300)
         fg.close()
         #display(bg_img)
-        filex=str(sender)+'-'+str(count)+'-pikachu.jpg'
+        filex=str(sender)+'-'+str(count)+'-'+strftime("%Y-%m-%d %H:%M:%S", gmtime())+'-pikachu.jpg'
         bg_img.save(filename=filex)
         cnopts = pysftp.CnOpts()
         cnopts.hostkeys = None
