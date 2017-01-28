@@ -113,10 +113,10 @@ def get_the_services(CAT):
 def make_image(bg_links,fg_link,sender):
     final_li=[] 
     count = 0 
-    for link in bg_links:
+    for i in range(0,len(bg_links)):
 
         fg_url = fg_link
-        bg_url = link
+        bg_url = bg_links[i]
 
         bg = urllib.request.urlopen(bg_url)
         with Image(file=bg) as bg_img:

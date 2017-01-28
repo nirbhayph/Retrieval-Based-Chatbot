@@ -113,7 +113,7 @@ def get_the_services(CAT):
 def make_image(bg_links,fg_link,sender):
     final_li=[] 
     count = 0 
-    for link in bg_links:
+    for i in range(0,len(bg_links)):
 
         fg_url = fg_link
         bg_url = link
@@ -139,6 +139,7 @@ def make_image(bg_links,fg_link,sender):
             #bg_img.save("new_image.jpg")
         bg.close()
         count=count+1
+    print final_li
     return final_li
         
 def change_product_type(recipient,type_):
