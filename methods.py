@@ -45,7 +45,7 @@ def send_message_product_slider(row, n):
                 "payment_summary":{
                   "currency":"Rupees",
                   "payment_type":"FIXED_AMOUNT",
-                  "is_test_payment" : true, 
+                  "is_test_payment" : True, 
                   "merchant_name":"Cimpress",
                   "requested_user_info":[
                     "shipping_address",
