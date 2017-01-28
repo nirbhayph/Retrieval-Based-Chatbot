@@ -38,7 +38,7 @@ def handle_messages():
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
             bg_links=""
             P_TYPE = get_product_type(sender)
-            mugs=["http://www.advancedscreenprinting.ca/sites/default/files/728_Bistro-blk-blank.jpg","http://omnihousewareinc.com/wp-content/uploads/2014/02/White_11oz_mug.jpg"]
+            mugs=["http://omnihousewareinc.com/wp-content/uploads/2014/02/White_11oz_mug.jpg"]
             shirts=['https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg', "http://images.junostatic.com/full/IS355782-01-01-BIG.jpg", "https://www.wordans.com/wvc-1440801044/wordansfiles/model_specifications/2015/8/28/116313/116313_original.jpg", "https://is.alicdn.com/img/pb/384/390/383/383390384_036.jpg"]
             if P_TYPE=="MG":
                  bg_links=mugs
