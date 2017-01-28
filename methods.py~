@@ -110,13 +110,10 @@ def get_the_services(CAT):
 	row=c.fetchall()
         return row, len(row)
 
-def make_image(bg_links,fg_link,sender):
-    final_li=[] 
-    count = 0 
-    for i in range(0,len(bg_links)):
+def make_image(bg_link,fg_link,sender,count):
 
         fg_url = fg_link
-        bg_url = bg_links[i]
+        bg_url = link
 
         bg = urllib.request.urlopen(bg_url)
         with Image(file=bg) as bg_img:
@@ -135,12 +132,9 @@ def make_image(bg_links,fg_link,sender):
             srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts)
             with srv.cd('/var/www/html/cimpress/images'): 
                 srv.put(filex) 
-            final_li.append(str("http://109.73.164.163/cimpress/images/"+filex))
+            return str("http://109.73.164.163/cimpress/images/"+filex)
             #bg_img.save("new_image.jpg")
         bg.close()
-        count=count+1
-    print final_li
-    return final_li
         
 def change_product_type(recipient,type_):
     c,d = connect()

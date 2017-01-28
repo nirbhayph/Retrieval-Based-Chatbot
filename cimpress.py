@@ -44,8 +44,13 @@ def handle_messages():
                  bg_links=mugs
             elif P_TYPE=="CL":
                  bg_links=shirts
+            list_f=[]
             fg_link = get_image_link(sender)
-            final_links = make_image(bg_links,fg_link,sender)
+            count=0
+            for i in bg_links:
+                list_f.append(make_image(i,fg_link,sender,count))
+                count=count+1
+            print list_f
             #send_message_image(PAT,sender,final_link)
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
             send_message_VC(PAT, sender) 
