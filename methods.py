@@ -117,6 +117,7 @@ def make_image(bg_links,fg_link,sender):
 
         fg_url = fg_link
         bg_url = bg_links[i]
+        print bg_url
 
         bg = urllib.request.urlopen(bg_url)
         with Image(file=bg) as bg_img:
