@@ -139,7 +139,7 @@ def make_image(bg_link,fg_link,sender,count):
             bg_img.composite(fg_img, left=390, top=300)
         fg.close()
         #display(bg_img)
-        filex=str(sender)+'-'+str(count)+'-'+strftime("%Y-%m-%d %H:%M:%S", gmtime())+'-pikachu.jpg'
+        filex=str(sender)+'-'+str(count)+'-'+strftime("%Y-%m-%d-%H-%M-%S", gmtime())+'-pikachu.jpg'
         bg_img.save(filename=filex)
         cnopts = pysftp.CnOpts()
         cnopts.hostkeys = None
