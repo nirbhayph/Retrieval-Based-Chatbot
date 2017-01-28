@@ -82,6 +82,7 @@ def handle_messages():
             if(str(item)=="attachments"):
                 print item
                 for mem,aea in value[0].iteritems(): 
+                    print mem
                     print "AEA"
                     print aea
                     #if(mem=="type" and type(aea)==type('')):
