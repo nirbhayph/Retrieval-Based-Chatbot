@@ -45,8 +45,8 @@ def handle_messages():
             elif P_TYPE=="CL":
                  bg_links=shirts
             fg_link = get_image_link(sender)
-            final_link = make_image(bg_links,fg_link,sender)
-            send_message_image(PAT,sender,final_link)
+            final_links = make_image(bg_links,fg_link,sender)
+            #send_message_image(PAT,sender,final_link)
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
             send_message_VC(PAT, sender) 
             change_product_type(sender,"VC")
