@@ -85,7 +85,7 @@ def handle_messages():
                     
                     if(mem=="payload"):
                           send_message(PAT,sender,"Thank you for placing an order with Vista Print")
-                          send_contact_details(PAT,sender)
+                          get_contact_details(PAT,sender)
                           break
                     
                           

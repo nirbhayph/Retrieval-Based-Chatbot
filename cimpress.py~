@@ -84,7 +84,7 @@ def handle_messages():
                 for mem,aea in value[0].iteritems(): 
                     
                     if(mem=="payload"):
-                          send_message(token,recipient,"Thank you for placing an order with Vista Print")
+                          send_message(PAT,sender,"Thank you for placing an order with Vista Print")
                           send_contact_details(PAT,sender)
                           break
                     
