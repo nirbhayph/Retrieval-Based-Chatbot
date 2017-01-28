@@ -56,11 +56,11 @@ def send_message_product_slider(row, n):
                   "price_list":[
                     {
                       "label":"Subtotal",
-                      "amount":price[i]
+                      "amount":"350"
                     },
                     {
                       "label":"Taxes",
-                      "amount":"12.11"
+                      "amount":"12.99"
                     }
                   ]
                 }

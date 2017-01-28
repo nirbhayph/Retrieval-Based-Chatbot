@@ -45,7 +45,7 @@ def send_message_product_slider(row, n):
                 "payment_summary":{
                   "currency":"Rupees",
                   "payment_type":"FIXED_AMOUNT",
-                  "is_test_payment" : true, 
+                  "is_test_payment" : True, 
                   "merchant_name":"Cimpress",
                   "requested_user_info":[
                     "shipping_address",
@@ -56,11 +56,11 @@ def send_message_product_slider(row, n):
                   "price_list":[
                     {
                       "label":"Subtotal",
-                      "amount":price[i]
+                      "amount":"350"
                     },
                     {
                       "label":"Taxes",
-                      "amount":"12.11"
+                      "amount":"12"
                     }
                   ]
                 }
