@@ -40,12 +40,7 @@ def send_message_product_slider(row, n):
                         "subtitle": price[i],
 			"image_url": row[i],
 			"buttons": [
-              {
-        "type":"web_url",
-        "url":row[i],
-        "title":"View Item",
-        "webview_height_ratio": "tall"
-      },
+             
                    
                               {
 				"type": "element_share"
