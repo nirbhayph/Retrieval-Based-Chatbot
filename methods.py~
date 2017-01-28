@@ -39,37 +39,12 @@ def send_message_product_slider(row, n):
 			"image_url": row[i],
 			"buttons": [
               {
-                "type":"payment",
-                "title":"buy",
-                "payload":"ORDER+"+row[i],
-                "payment_summary":{
-                  "currency":"USD",
-                  "payment_type":"FIXED_AMOUNT",
-                  "is_test_payment" : True, 
-                  "merchant_name":"Cimpress",
-                  "requested_user_info":[
-                    "shipping_address",
-                    "contact_name",
-                    "contact_phone",
-                    "contact_email"
-                  ],
-                  "price_list":[
-                    {
-                      "label":"Subtotal",
-                      "amount":"350"
-                    },
-                    {
-                      "label":"Taxes",
-                      "amount":"12.99"
-                    }
-                  ]
-                }
-              }, 
-                   {
-				"type": "web_url",
-				"url": row[i],
-				"title": "View"
-			}, 
+        "type":"web_url",
+        "url":"https://petersfancyapparel.com/classic_white_tshirt",
+        "title":"View Item",
+        "webview_height_ratio": "tall"
+      },
+                   
                               {
 				"type": "element_share"
 				
