@@ -80,6 +80,7 @@ def handle_messages():
                           #CALL Vision API
                           PROD_TYPE = get_product_type(sender)
                           if PROD_TYPE=="MG" or PROD_TYPE=="CL":
+                              clarifAI(image_url)
                               send_message_edit(PAT,sender)
                           elif PROD_TYPE=="VC":
                               send_message_redirect_cimpress(PAT, sender)    

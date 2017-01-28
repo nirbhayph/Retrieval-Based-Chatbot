@@ -9,6 +9,9 @@ import pysftp
 from PIL import Image
 import requests
 from io import BytesIO
+from clarifai import rest
+import json
+from clarifai.rest import ClarifaiApp
 
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
