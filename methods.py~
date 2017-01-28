@@ -12,6 +12,8 @@ from io import BytesIO
 from clarifai import rest
 import json
 from clarifai.rest import ClarifaiApp
+app = ClarifaiApp("eSSlQCgzDDqshi0U2XRTg-6gYh0yTbCg1faYChPp", "1IbRENOi-ABMknyufNFjBIYu-KF43jSOQXX65r64")
+from clarifai.rest import Image as ClImage
 
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
