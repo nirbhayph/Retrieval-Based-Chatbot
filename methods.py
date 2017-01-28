@@ -23,6 +23,8 @@ def connect():
 	return connection.cursor(),connection
 
 def send_message_product_slider(row, n):
+        print "URL:"
+        print row
 	outer_list = []
         title=[]
         price=[]

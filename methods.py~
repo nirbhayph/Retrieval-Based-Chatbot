@@ -40,7 +40,7 @@ def send_message_product_slider(row, n):
 			"buttons": [
               {
         "type":"web_url",
-        "url":"https://petersfancyapparel.com/classic_white_tshirt",
+        "url":row[i],
         "title":"View Item",
         "webview_height_ratio": "tall"
       },
