@@ -32,8 +32,8 @@ def send_message_product_slider(row, n):
            price=["Rs. 300","Rs. 400"]
            title=["Mug White", "Mug White Large"]
         elif n==4:
-           price=["Rs. 300","Rs. 400","Rs.600", "Rs. 500"]
-           title=["TShirt1", "TShirt2", "TShirt3", "TShirt4"]
+           price=["Rs. 300","Rs. 700","Rs.600", "Rs. 500"]
+           title=["TShirt Black", "Black Hoodie", "TShirt White", "TShirt Blue"]
 	for i in range(n):
 		inner_dict = {
 			"title": title[i],
