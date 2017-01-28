@@ -133,9 +133,20 @@ def handle_messages():
   print payload
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
-    w=["hi","hello","hey"]
+    w=["hi","hello","hey","new"]
     if message.lower() in w:
       send_message_welcome(PAT, sender)
+    if "visiting" in message.lower() or "card" in message.lower():
+      send_message_VC(PAT, sender) 
+      change_product_type(sender,"VC")
+    if "mugs" in message.lower():
+      send_message(PAT, sender,"Please upload an image you wish to add on the Mug") 
+      change_product_type(sender,"MG")
+    if "cloth" in message.lower() or "clothes" in message.lower() or "shirt" in message.lower() or "tshirt" in message.lower():
+      send_message(PAT, sender,"Please upload an image you wish to use")
+      change_product_type(sender,"CL")
+      
+    
 
     
   return "ok"
