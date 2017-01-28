@@ -110,7 +110,7 @@ def handle_messages():
                                   srv.put(filex)
                               r = requests.get("http://109.73.164.163/cimpress/images/g-cloud.php?filex="+filex+"&sender="+sender)
                               if len(str(r.content))>0:
-                                  send_message(PAT,sender,str(r.content))
+                                  send_message(PAT,sender,"Seems like you work in"+str(r.content))
                               send_message_redirect_cimpress(PAT, sender)    
                       elif IMAGE_QUALITY=="no":
                           send_message(PAT, sender,"The quality of the image you uploaded doesn't look up to the mark, there will be a problem when it comes to printing")
