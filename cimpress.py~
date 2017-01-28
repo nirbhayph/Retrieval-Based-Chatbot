@@ -49,16 +49,26 @@ def handle_messages():
             send_message_VC(PAT, sender) 
             change_product_type(sender,"VC")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="MG":
-            send_message(PAT, sender,"Please upload an image you wish to add on the Mug") 
+            send_message_MG(PAT,sender)
             change_product_type(sender,"MG")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="CL":
-            send_message(PAT, sender,"Please upload an image you wish to use")
+            send_message_CL(PAT,sender)
             change_product_type(sender,"CL")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="YES_VC":
             send_message(PAT, sender,"Please upload your logo image")
             change_product_type(sender,"VC")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_VC":
-            send_message_redirect_cimpress(PAT, sender)    
+            send_message_redirect_cimpress(PAT, sender)
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="YES_MG":
+            send_message(PAT, sender,"Please upload an image you wish to add on the Mug") 
+            change_product_type(sender,"MG")
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_MG":
+            send_message_redirect_aviary(PAT, sender)  
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="YES_CL":
+            send_message(PAT, sender,"Please upload an image you wish to use")
+            change_product_type(sender,"VC")
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_CL":
+            send_message_redirect_aviary(PAT, sender)      
  
         if messaging_event.get("message"):
           
@@ -191,7 +201,7 @@ def send_message_welcome(token, recipient):
       {
         "type":"postback",
         "title":"Mugs",
-        "payload":"MU"
+        "payload":"MG"
       },
       {
         "type":"postback",
@@ -254,7 +264,85 @@ def send_message_VC(token, recipient):
     }),
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
-    print r.text    
+    print r.text   
+
+def send_message_VC(token, recipient):
+ 
+  message={
+
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"Do you have an image you wish to add on the mug?",
+          "buttons":[   
+              {
+        "type":"postback",
+        "title":"Yes",
+        "payload":"YES_MG"
+      },
+      {
+        "type":"postback",
+        "title":"No",
+        "payload":"NO_MG"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text 
+
+def send_message_VC(token, recipient):
+ 
+  message={
+
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"Do you have an image you would wish to add to the cloth wear?",
+          "buttons":[   
+              {
+        "type":"postback",
+        "title":"Yes",
+        "payload":"YES_CL"
+      },
+      {
+        "type":"postback",
+        "title":"No",
+        "payload":"NO_CL"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text  
 
 def send_message_redirect_cimpress(token,recipient):
  
