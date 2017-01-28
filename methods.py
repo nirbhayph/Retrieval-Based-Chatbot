@@ -2,7 +2,7 @@ import MySQLdb as db
 from random import randint
 import time
 from six.moves import urllib
-from wand.image import Image
+from wand.image import Image as x1x
 from wand.display import display
 import wand
 import pysftp
@@ -118,9 +118,9 @@ def make_image(bg_link,fg_link,sender,count):
     bg_url = bg_link
 
     bg = urllib.request.urlopen(bg_url)
-    with Image(file=bg) as bg_img:
+    with x1x(file=bg) as bg_img:
         fg = urllib.request.urlopen(fg_url)
-        with Image(file=fg) as fg_img:
+        with x1x(file=fg) as fg_img:
             #fg_img.transparent_color(wand.color.Color('#FFF'))
             fg_img.resize(200,200)
 
