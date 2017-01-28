@@ -179,7 +179,7 @@ def get_image_quality(url):
     
 def clarifAI(urlX):
     model = app.models.get('general-v1.3')
-    image = ClImage(url='https://s4.scoopwhoop.com/anj/HS01/697943871.jpg')
+    image = ClImage(url=urlX)
     ans=model.predict([image])
     #print(ans)
     xx=list()
@@ -187,7 +187,7 @@ def clarifAI(urlX):
       xx.append(ans['outputs'][0]['data']['concepts'][i]['name'])
       #xx=ans['outputs'][0]['data']['concepts'][i]
     li = []
-    taglines='{"results":[{"man":"Suits, Harvey Specter"},{"army":"Indian"},{"wedding":"Marry"},{"success":"India"}]}'
+    taglines='{"results":[{"man":"Try not to become a man of success, but rather try to become a man of value."},{"army":"He enemy are only 50 yards from us. We are heavily outnumbered. We are under devastating fire. I shall not withdraw an inch but will fight to our last man and our last round."},{"wedding":"Love is the master key that opens the gates of happiness, of hatred, of jealousy, and, most easily of all, the gate of fear."},{"success":"The only time success comes before work is in the dictionary."},{"text":"There are infinite shades of grey. Writing often appears so black and white."}]}'
     taglines=json.loads(taglines)
     for m in taglines["results"]:
         for a,b in m.items():

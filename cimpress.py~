@@ -72,7 +72,8 @@ def handle_messages():
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_VC":
             send_message_redirect_cimpress(PAT, sender) 
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="BUY_PROD":
-            share_location(PAT, sender)    
+            share_location(PAT, sender) 
+            set_box(sender,"LOC")   
  
         if messaging_event.get("message"):
           
@@ -89,6 +90,7 @@ def handle_messages():
                    if(mem=="payload"):
                       image_url=str(aea["url"])
                       print image_url
+                      set_box(sender,"NOT_LOC")
                       #Check for image quality
                       IMAGE_QUALITY=get_image_quality(image_url)
                       if IMAGE_QUALITY=="yes":
