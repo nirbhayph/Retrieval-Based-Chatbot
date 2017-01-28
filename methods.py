@@ -134,9 +134,10 @@ def make_image(bg_link,fg_link,sender,count):
         srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts)
         with srv.cd('/var/www/html/cimpress/images'): 
             srv.put(filex) 
+        bg.close()
         return str("http://109.73.164.163/cimpress/images/"+filex)
         #bg_img.save("new_image.jpg")
-    bg.close()
+    
         
 def change_product_type(recipient,type_):
     c,d = connect()
