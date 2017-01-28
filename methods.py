@@ -9,6 +9,9 @@ import pysftp
 from PIL import Image
 import requests
 from io import BytesIO
+from clarifai import rest
+import json
+from clarifai.rest import ClarifaiApp
 
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
@@ -155,6 +158,24 @@ def get_image_quality(url):
         return str("no")
     
     
+def clarifAI(urlX):
+    model = app.models.get('general-v1.3')
+    image = ClImage(url='https://s4.scoopwhoop.com/anj/HS01/697943871.jpg')
+    ans=model.predict([image])
+    #print(ans)
+    xx=list()
+    for i in range(0,len(ans['outputs'][0]['data']['concepts']) ):
+    xx.append(ans['outputs'][0]['data']['concepts'][i]['name'])
+    #xx=ans['outputs'][0]['data']['concepts'][i]
+    li = []
+    taglines='{"results":[{"man":"Suits, Harvey Specter"},{"army":"Indian"},{"wedding":"Marry"},{"success":"india"}]}'
+    taglines=json.loads(taglines)
+    for m in taglines["results"]:
+        for a,b in m.items():
+            if a in xx:
+                li.append(b)
+    return li
+
 
     
 
