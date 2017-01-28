@@ -36,8 +36,8 @@ def handle_messages():
           print "Postback"
           print str(messaging_event["postback"]["payload"].encode('unicode_escape'))
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
-            P_TYPE = get_product_type(sender)
             bg_link=""
+            P_TYPE = get_product_type(sender)
             if P_TYPE=="MG":
                  bg_link='http://getsublimationblanks.co.uk/image/product/b/e/10oz-classic-white-mug-36-blanks-503.jpg'
             elif P_TYPE=="CL":
