@@ -42,7 +42,7 @@ def send_message_product_slider(row, n):
 			"buttons": [
              {
                 "type":"web_url",
-                "url":"https://petersfancybrownhats.com",
+                "url":row[i],
                 "title":"View Website"
               },
                    

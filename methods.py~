@@ -40,7 +40,11 @@ def send_message_product_slider(row, n):
                         "subtitle": price[i],
 			"image_url": row[i],
 			"buttons": [
-             
+             {
+                "type":"web_url",
+                "url":"https://petersfancybrownhats.com",
+                "title":"View Website"
+              },
                    
                               {
 				"type": "element_share"
