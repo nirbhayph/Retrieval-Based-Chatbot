@@ -82,9 +82,9 @@ def handle_messages():
             if(str(item)=="attachments"):
                 print item
                 for mem,aea in value[0].iteritems(): 
-                    print "AEA"
-                    print aea
-                    #if(mem=="type" and type(aea)==type('')):
+                    
+                    if(mem=="payload"):
+                          print str(aea["coordinates"]["lat"])+":"+str(aea["coordinates"]["long"])
                           #send_message(token,recipient,"Thank you for placing an order with Vista Print")
                           #send_contact_details(PAT,sender)
                           #break
