@@ -70,7 +70,9 @@ def handle_messages():
             send_message(PAT, sender,"Please upload your logo image")
             change_product_type(sender,"VC")
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_VC":
-            send_message_redirect_cimpress(PAT, sender)    
+            send_message_redirect_cimpress(PAT, sender) 
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="BUY_PROD":
+            share_location(PAT, sender)    
  
         if messaging_event.get("message"):
           
@@ -80,8 +82,11 @@ def handle_messages():
             if(str(item)=="attachments"):
                 print item
                 for mem,aea in value[0].iteritems(): 
+                    if (mem=="location"):
+                          send_message(token,recipient,"If you wish to continue searching, just type 'NEW'")
+                          send_contact_details(PAT,sender)
+                          break
                     if(mem=="payload"):
-                       
                       image_url=str(aea["url"])
                       print image_url
                       #Check for image quality
@@ -110,7 +115,7 @@ def handle_messages():
                                   srv.put(filex)
                               r = requests.get("http://109.73.164.163/cimpress/images/g-cloud.php?filex="+filex+"&sender="+sender)
                               if len(str(r.content))>0:
-                                  send_message(PAT,sender,"Seems like you work in"+str(r.content))
+                                  send_message(PAT,sender,"Seems like you work in "+str(r.content))
                               send_message_redirect_cimpress(PAT, sender)    
                       elif IMAGE_QUALITY=="no":
                           send_message(PAT, sender,"The quality of the image you uploaded doesn't look up to the mark, there will be a problem when it comes to printing")
@@ -361,6 +366,58 @@ def product_slider(token,recipient, list_f):
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
     print r.text
+
+def share_location(token,recipient):
+  message={
+    "text":"Please share your location:",
+    "quick_replies":[
+      {
+        "content_type":"location",
+      }
+    ]
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages", params={"access_token": token}, data=json.dumps({"recipient": {"id": recipient},"message": message}),headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text
+
+def get_contact_details(token, recipient):
+  send_message(token,recipient,"If you wish to continue searching, just type 'NEW'")
+  message={
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"Reach us at",
+            "image_url":"https://cimpress.com/wp-content/uploads/2014/04/Cimpress_Home_FTD-01.jpg",
+            "subtitle":"Lalbaugh, Mumbai, Maharashtra, India",
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://vistaprint.in",
+                "title":"View Website"
+              },
+              {
+		"type": "element_share"
+				
+             },
+             {
+          "type":"phone_number",
+          "title":"Call Representative",
+          "payload":"+912267186718"
+             }
+              
+            ]      
+          }
+        ]
+      }
+    }
+  }
+
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages", params={"access_token": token}, data=json.dumps({"recipient": {"id": recipient},"message": message}),headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+      print r.text
     
 if __name__ == '__main__':
   app.run()

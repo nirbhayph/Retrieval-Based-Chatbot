@@ -40,9 +40,14 @@ def send_message_product_slider(row, n):
                         "subtitle": price[i],
 			"image_url": row[i],
 			"buttons": [
+		{
+        "type":"postback",
+        "title":"No",
+        "payload":"NO_VC"
+      },
              {
                 "type":"web_url",
-                "url":"https://petersfancybrownhats.com",
+                "url":"http://vistaprint.in",
                 "title":"View Website"
               },
                    

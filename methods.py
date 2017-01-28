@@ -40,9 +40,14 @@ def send_message_product_slider(row, n):
                         "subtitle": price[i],
 			"image_url": row[i],
 			"buttons": [
+		{
+        "type":"postback",
+        "title":"Buy",
+        "payload":"BUY_PROD"
+      },
              {
                 "type":"web_url",
-                "url":row[i],
+                "url":"http://vistaprint.in",
                 "title":"View Website"
               },
                    
