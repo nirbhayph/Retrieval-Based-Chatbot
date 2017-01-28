@@ -83,44 +83,11 @@ def handle_messages():
                 print item
                 for mem,aea in value[0].iteritems(): 
                     
-                    #if(mem=="payload"):
-                          #send_message(token,recipient,"Thank you for placing an order with Vista Print")
-                          #send_contact_details(PAT,sender)
-                          #break
                     if(mem=="payload"):
-                      image_url=str(aea["url"])
-                      print image_url
-                      #Check for image quality
-                      IMAGE_QUALITY=get_image_quality(image_url)
-                      if IMAGE_QUALITY=="yes":
-                          nnx = urllib.request.urlopen(image_url)
-                          with x2x(file=nnx) as IMAG:
-                              filex=str(sender)+'-IMAG.jpg'
-                              IMAG.save(filename=filex)
-                          send_message(PAT, sender,"Congratualtions! Your image cleared the quality test")
-                          store_image_link(sender,image_url)
-                          #CALL Vision API
-                          PROD_TYPE = get_product_type(sender)
-                          if PROD_TYPE=="MG" or PROD_TYPE=="CL":
-                              m = clarifAI(image_url)
-                              if len(m)>0:
-                                  send_message(PAT,sender,"We have some taglines you can use based on your image ;)")
-                              for i in range(0,len(m)):
-                                  send_message(PAT,sender,str(m[i].encode('unicode_escape')))
-                              send_message_edit(PAT,sender)
-                          elif PROD_TYPE=="VC":
-                              cnopts = pysftp.CnOpts()
-        		      cnopts.hostkeys = None
-                              srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts)
-                              with srv.cd('/var/www/html/cimpress/images'): 
-                                  srv.put(filex)
-                              r = requests.get("http://109.73.164.163/cimpress/images/g-cloud.php?filex="+filex+"&sender="+sender)
-                              if len(str(r.content))>0:
-                                  send_message(PAT,sender,"Seems like you work in "+str(r.content))
-                              send_message_redirect_cimpress(PAT, sender)    
-                      elif IMAGE_QUALITY=="no":
-                          send_message(PAT, sender,"The quality of the image you uploaded doesn't look up to the mark, there will be a problem when it comes to printing")
-                          send_message(PAT, sender,"It will be better if you upload a higher quality image")
+                          send_message(token,recipient,"Thank you for placing an order with Vista Print")
+                          send_contact_details(PAT,sender)
+                          break
+                    
                           
 
                         
