@@ -36,15 +36,17 @@ def handle_messages():
           print "Postback"
           print str(messaging_event["postback"]["payload"].encode('unicode_escape'))
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
-            bg_link=""
+            bg_links=""
             P_TYPE = get_product_type(sender)
+            mugs=["http://getsublimationblanks.co.uk/image/product/b/e/10oz-classic-white-mug-36-blanks-503.jpg","https://nouwcdn.com/8/1100000/1070000/1068378/pics/2016101614571512710_sbig.jpg","http://www.advancedscreenprinting.ca/sites/default/files/728_Bistro-blk-blank.jpg","http://www.neilbrothers.co.uk/images/mugs/durham-dark-blue.png"]
+            shirts=['https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg', "http://images.junostatic.com/full/IS355782-01-01-BIG.jpg", "https://www.wordans.com/wvc-1440801044/wordansfiles/model_specifications/2015/8/28/116313/116313_original.jpg", "https://is.alicdn.com/img/pb/384/390/383/383390384_036.jpg"]
             if P_TYPE=="MG":
-                 bg_link='http://getsublimationblanks.co.uk/image/product/b/e/10oz-classic-white-mug-36-blanks-503.jpg'
+                 bg_links=mugs
             elif P_TYPE=="CL":
-                 bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
+                 bg_links=shirts
             fg_link = get_image_link(sender)
-            final_link = make_image(bg_link,fg_link,sender)
-            send_message_image(PAT,sender,final_link)
+            final_links = make_image(bg_links,fg_link,sender)
+            #send_message_image(PAT,sender,final_link)
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
             send_message_VC(PAT, sender) 
             change_product_type(sender,"VC")

@@ -110,33 +110,37 @@ def get_the_services(CAT):
 	row=c.fetchall()
         return row, len(row)
 
-def make_image(bg_link,fg_link,sender):
-        
+def make_image(bg_links,fg_link,sender):
+    final_li=[] 
+    count = 0 
+    for link in bg_links:
 
+        fg_url = fg_link
+        bg_url = link
 
-    fg_url = fg_link
-    bg_url = bg_link
+        bg = urllib.request.urlopen(bg_url)
+        with Image(file=bg) as bg_img:
+            fg = urllib.request.urlopen(fg_url)
+            with Image(file=fg) as fg_img:
+                #fg_img.transparent_color(wand.color.Color('#FFF'))
+                fg_img.resize(200,200)
 
-    bg = urllib.request.urlopen(bg_url)
-    with Image(file=bg) as bg_img:
-        fg = urllib.request.urlopen(fg_url)
-        with Image(file=fg) as fg_img:
-            #fg_img.transparent_color(wand.color.Color('#FFF'))
-            fg_img.resize(200,200)
-
-            bg_img.composite(fg_img, left=390, top=300)
-        fg.close()
-        #display(bg_img)
-        filex=str(sender)+'-pikachu.jpg'
-        bg_img.save(filename=filex)
-        cnopts = pysftp.CnOpts()
-        cnopts.hostkeys = None
-        srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts)
-        with srv.cd('/var/www/html/cimpress/images'): 
-            srv.put(filex) 
-        return str("http://109.73.164.163/cimpress/images/"+filex)
-        #bg_img.save("new_image.jpg")
-    bg.close()
+                bg_img.composite(fg_img, left=390, top=300)
+            fg.close()
+            #display(bg_img)
+            filex=str(sender)+'-'+str(count)+'-pikachu.jpg'
+            bg_img.save(filename=filex)
+            cnopts = pysftp.CnOpts()
+            cnopts.hostkeys = None
+            srv = pysftp.Connection(host="109.73.164.163", username="root", password="6kH%oVulTFBe", cnopts=cnopts)
+            with srv.cd('/var/www/html/cimpress/images'): 
+                srv.put(filex) 
+            final_li.append(str("http://109.73.164.163/cimpress/images/"+filex))
+            #bg_img.save("new_image.jpg")
+        bg.close()
+        count=count+1
+    print final_li
+    return final_li
         
 def change_product_type(recipient,type_):
     c,d = connect()
