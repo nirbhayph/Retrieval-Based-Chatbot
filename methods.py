@@ -136,6 +136,12 @@ def change_product_type(recipient,type_):
     c.execute("Insert Into `cimpress_prod_type` (`userid`, `type`) VALUES ('"+recipient+"', '"+type_+"')")
     d.commit()
 
+def get_product_type(recipient):
+        c,d = connect()
+        c.execute("select * from cimpress_prod_type where userid='"+str(recipient)+"' ORDER BY timestamp_ DESC")
+	row=c.fetchall()
+        return row[0][2]
+
 
 
 

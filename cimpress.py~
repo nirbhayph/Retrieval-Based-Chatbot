@@ -36,14 +36,34 @@ def handle_messages():
           print "Postback"
           print str(messaging_event["postback"]["payload"].encode('unicode_escape'))
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
+            P_TYPE = get_image_type(sender)
+            bg_link=""
+            if P_TYPE=="MG":
+                 bg_link='http://getsublimationblanks.co.uk/image/product/b/e/10oz-classic-white-mug-36-blanks-503.jpg'
+            elif P_TYPE=="CL":
+                 bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
             fg_link = get_image_link(sender)
-            bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
-            final_link = make_image(bg_link,fg_link)
+            final_link = make_image(bg_link,fg_link,sender)
             send_message_image(PAT,sender,final_link)
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
+            send_message_VC(PAT, sender) 
+            change_product_type(sender,"VC")
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="MG":
+            send_message(PAT, sender,"Please upload an image you wish to add on the Mug") 
+            change_product_type(sender,"MG")
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="CL":
+            send_message(PAT, sender,"Please upload an image you wish to use")
+            change_product_type(sender,"CL")
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="YES_VC":
+            send_message(PAT, sender,"Please upload your logo image")
+            change_product_type(sender,"VC")
+          elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="NO_VC":
+            send_message_redirect_cimpress(PAT, sender)    
  
         if messaging_event.get("message"):
           
           for item,value in messaging_event["message"].iteritems():
+
                       
             if(str(item)=="attachments"):
                 print item
@@ -52,8 +72,21 @@ def handle_messages():
                        
                       image_url=str(aea["url"])
                       print image_url
-                      store_image_link(sender,image_url)
-                      send_message_edit(PAT,sender)
+                      #Check for image quality
+                      IMAGE_QUALITY="yes"
+                      if IMAGE_QUALITY=="yes":
+                          send_message(PAT, sender,"Congratualtions! Your image cleared the quality test")
+                          store_image_link(sender,image_url)
+                          #CALL Vision API
+                          PROD_TYPE = get_product_type(sender)
+                          if PROD_TYPE=="MG" or PROD_TYPE="CL":
+                              send_message_edit(PAT,sender)
+                          elif PROD_TYPE=="VC":
+                              send_message_redirect_cimpress(PAT, sender)    
+                      elif IMAGE_QUALITY=="no":
+                          send_message(PAT, sender,"The quality of the image you uploaded doesn't look up to the mark, there will be a problem when it comes to printing")
+                          send_message(PAT, sender,"It will be better if you upload a higher quality image")
+                          
 
                         
   print "Handling Messages"
@@ -61,8 +94,10 @@ def handle_messages():
   print payload
   for sender, message in messaging_events(payload):
     print "Incoming from %s: %s" % (sender, message)
-    if message=="hi":
-      send_message(PAT, sender, message)
+    w=["hi","hello","hey"]
+    if message.lower() in w:
+      send_message_welcome(PAT, sender)
+
     
   return "ok"
 
@@ -117,7 +152,7 @@ def send_message_edit(token, recipient):
             
               {
         "type":"postback",
-        "title":"Show",
+        "title":"Show Products",
         "payload":"SHOW_OPTIONS"
       }
                 
@@ -137,6 +172,123 @@ def send_message_edit(token, recipient):
     headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
     print r.text
+
+def send_message_welcome(token, recipient):
+ 
+  message={
+
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"Hi, what are you looking for?",
+          "buttons":[   
+              {
+        "type":"postback",
+        "title":"Visiting Card",
+        "payload":"VC"
+      },
+      {
+        "type":"postback",
+        "title":"Mugs",
+        "payload":"MU"
+      },
+      {
+        "type":"postback",
+        "title":"Clothing",
+        "payload":"CL"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text    
+
+def send_message_VC(token, recipient):
+ 
+  message={
+
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"Do you have a logo?",
+          "buttons":[   
+              {
+        "type":"postback",
+        "title":"Yes",
+        "payload":"YES_VC"
+      },
+      {
+        "type":"postback",
+        "title":"No",
+        "payload":"NO_VC"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text    
+
+def send_message_redirect_cimpress(token,recipient):
+ 
+  message={
+
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"Click here to make your customised visiting card",
+          "buttons":[   
+              {
+        "type":"web_url",
+        "url":"http://theblendsalon.com/cimpress/api.html",
+        "title":"Create Visiting Card"
+      }
+
+                
+            
+          ]
+        }
+      }
+  }
+  r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+    params={"access_token": token},
+    data=json.dumps({
+
+      "recipient": {"id": recipient},
+      "message": message
+      
+    }),
+    headers={'Content-type': 'application/json'})
+  if r.status_code != requests.codes.ok:
+    print r.text    
 
 def send_message_image(token, recipient,link):
   message = {

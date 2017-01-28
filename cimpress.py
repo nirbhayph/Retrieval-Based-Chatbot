@@ -36,8 +36,13 @@ def handle_messages():
           print "Postback"
           print str(messaging_event["postback"]["payload"].encode('unicode_escape'))
           if str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="SHOW_OPTIONS":
+            P_TYPE = get_product_type(sender)
+            bg_link=""
+            if P_TYPE=="MG":
+                 bg_link='http://getsublimationblanks.co.uk/image/product/b/e/10oz-classic-white-mug-36-blanks-503.jpg'
+            elif P_TYPE=="CL":
+                 bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
             fg_link = get_image_link(sender)
-            bg_link='https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg'
             final_link = make_image(bg_link,fg_link,sender)
             send_message_image(PAT,sender,final_link)
           elif str(messaging_event["postback"]["payload"].encode('unicode_escape'))=="VC":
@@ -67,8 +72,21 @@ def handle_messages():
                        
                       image_url=str(aea["url"])
                       print image_url
-                      store_image_link(sender,image_url)
-                      send_message_edit(PAT,sender)
+                      #Check for image quality
+                      IMAGE_QUALITY="yes"
+                      if IMAGE_QUALITY=="yes":
+                          send_message(PAT, sender,"Congratualtions! Your image cleared the quality test")
+                          store_image_link(sender,image_url)
+                          #CALL Vision API
+                          PROD_TYPE = get_product_type(sender)
+                          if PROD_TYPE=="MG" or PROD_TYPE="CL":
+                              send_message_edit(PAT,sender)
+                          elif PROD_TYPE=="VC":
+                              send_message_redirect_cimpress(PAT, sender)    
+                      elif IMAGE_QUALITY=="no":
+                          send_message(PAT, sender,"The quality of the image you uploaded doesn't look up to the mark, there will be a problem when it comes to printing")
+                          send_message(PAT, sender,"It will be better if you upload a higher quality image")
+                          
 
                         
   print "Handling Messages"
@@ -134,7 +152,7 @@ def send_message_edit(token, recipient):
             
               {
         "type":"postback",
-        "title":"Show",
+        "title":"Show Products",
         "payload":"SHOW_OPTIONS"
       }
                 
