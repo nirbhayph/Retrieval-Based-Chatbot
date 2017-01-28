@@ -65,11 +65,7 @@ def send_message_product_slider(row, n):
                   ]
                 }
               }, 
-                   {
-				"type": "web_url",
-				"url": row[i],
-				"title": "View"
-			}, 
+                   
                               {
 				"type": "element_share"
 				
