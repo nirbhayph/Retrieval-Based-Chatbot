@@ -73,7 +73,7 @@ def handle_messages():
                       image_url=str(aea["url"])
                       print image_url
                       #Check for image quality
-                      IMAGE_QUALITY="yes"
+                      IMAGE_QUALITY=get_image_quality(image_url)
                       if IMAGE_QUALITY=="yes":
                           send_message(PAT, sender,"Congratualtions! Your image cleared the quality test")
                           store_image_link(sender,image_url)

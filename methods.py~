@@ -6,6 +6,9 @@ from wand.image import Image
 from wand.display import display
 import wand
 import pysftp
+from PIL import Image
+import requests
+from io import BytesIO
 
 def connect():
 	connection = db.Connection(host="107.180.39.237", port=3306, user="ashish_test", passwd="bingipok", db="keyqual_keyhire")
@@ -141,6 +144,21 @@ def get_product_type(recipient):
         c.execute("select * from cimpress_prod_type where userid='"+str(recipient)+"' ORDER BY timestamp_ DESC")
 	row=c.fetchall()
         return row[0][2]
+
+def get_image_quality(url):
+
+    url='http://www.w3schools.com/css/trolltunga.jpg'
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+    k = img.size
+    if k[0]>500 and k[1]>500:
+        return str("yes")
+    else:
+        return str("no")
+    
+    
+
+    
 
 
 

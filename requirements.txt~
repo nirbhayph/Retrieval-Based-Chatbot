@@ -18,4 +18,4 @@ requests-oauthlib==0.7.0
 six==1.10.0
 Werkzeug==0.11.15
 Wand==0.4.4
-pysftp=0.2.9
+pysftp==0.2.9
