@@ -70,7 +70,7 @@ def send_message_product_slider(row, n):
 				"url": row[i],
 				"title": "View"
 			}, 
-                               {
+                              {
 				"type": "element_share"
 				
              }]

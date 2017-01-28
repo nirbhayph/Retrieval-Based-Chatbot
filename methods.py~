@@ -60,7 +60,7 @@ def send_message_product_slider(row, n):
                     },
                     {
                       "label":"Taxes",
-                      "amount":"2.47"
+                      "amount":"12.11"
                     }
                   ]
                 }
