@@ -45,15 +45,18 @@ def handle_messages():
             P_TYPE = get_product_type(sender)
             mugs=["http://omnihousewareinc.com/wp-content/uploads/2014/02/White_11oz_mug.jpg","https://files.giftsoffer.ru/reviewer/thumbnails/www/4663_8_psd_1000x1000.jpg"]
             shirts=['https://blueinc_co_uk.secure-cdn.visualsoft.co.uk/images/mens-black-line-up-girl-t-shirt-p20285-22116_zoom.jpg', "http://images.junostatic.com/full/IS355782-01-01-BIG.jpg", "https://www.wordans.com/wvc-1440801044/wordansfiles/model_specifications/2015/8/28/116313/116313_original.jpg", "https://is.alicdn.com/img/pb/384/390/383/383390384_036.jpg"]
+            xr=""
             if P_TYPE=="MG":
+                 xr="mugs"
                  bg_links=mugs
             elif P_TYPE=="CL":
+                 xr="clo"
                  bg_links=shirts
             list_f=[]
             fg_link = get_image_link(sender)
             count=0
             for i in bg_links:
-                list_f.append(make_image(i,fg_link,sender,count))
+                list_f.append(make_image(i,fg_link,sender,count,xr))
                 count=count+1
             print list_f
             product_slider(PAT,sender,list_f)

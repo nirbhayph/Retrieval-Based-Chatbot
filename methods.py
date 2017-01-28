@@ -126,10 +126,23 @@ def get_the_services(CAT):
 	row=c.fetchall()
         return row, len(row)
 
-def make_image(bg_link,fg_link,sender,count):
+def make_image(bg_link,fg_link,sender,count,typer):
         
-
-
+    if typer=="clo" and count==0:
+       lis = [200,200,390,300]
+    elif typer=="clo" and count==1:
+       lis = [200,200,275,300]
+    elif typer=="clo" and count==2:
+       lis = [200,200,390,350]
+    elif typer=="clo" and count==3:
+       lis = [200,200,220,230]
+    elif typer=="mugs" and count==0:
+       lis = [200,200,370,300]
+    elif typer=="mugs" and count==1:
+       lis = [200,200,435,300]
+    
+    
+       
     fg_url = fg_link
     bg_url = bg_link
 
@@ -138,9 +151,9 @@ def make_image(bg_link,fg_link,sender,count):
         fg = urllib.request.urlopen(fg_url)
         with x1x(file=fg) as fg_img:
             #fg_img.transparent_color(wand.color.Color('#FFF'))
-            fg_img.resize(200,200)
+            fg_img.resize(lis[0],lis[1])
 
-            bg_img.composite(fg_img, left=390, top=300)
+            bg_img.composite(fg_img, left=lis[2], top=lis[3])
         fg.close()
         #display(bg_img)
         filex=str(sender)+'-'+str(count)+'-'+strftime("%Y-%m-%d-%H-%M-%S", gmtime())+'-pikachu.jpg'
