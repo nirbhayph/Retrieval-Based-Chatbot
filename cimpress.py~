@@ -82,8 +82,8 @@ def handle_messages():
             if(str(item)=="attachments"):
                 print item
                 for mem,aea in value[0].iteritems(): 
-                    if (mem=="location"):
-                          send_message(token,recipient,"If you wish to continue searching, just type 'NEW'")
+                    if(mem=="type" and ):
+                          send_message(token,recipient,"Thank you for placing an order with Vista Print")
                           send_contact_details(PAT,sender)
                           break
                     if(mem=="payload"):
