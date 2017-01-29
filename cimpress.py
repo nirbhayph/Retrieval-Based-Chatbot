@@ -87,12 +87,12 @@ def handle_messages():
                 if check_box(sender)=="LOC":
                       send_message(PAT,sender,"Thank you for placing an order with Vista Print")
                       get_contact_details(PAT,sender)
+                      set_box(sender,"NOT_LOC")
                       break
                 for mem,aea in value[0].iteritems(): 
                    if(mem=="payload"):
                       image_url=str(aea["url"])
                       print image_url
-                      set_box(sender,"NOT_LOC")
                       #Check for image quality
                       IMAGE_QUALITY=get_image_quality(image_url)
                       if IMAGE_QUALITY=="yes":
